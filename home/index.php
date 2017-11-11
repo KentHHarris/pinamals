@@ -10,28 +10,27 @@
  <div id="mapid"></div>
 <p id="demo"></p>
 <script>
-    getLocation()
-    
+getLocation();    
 var x = document.getElementById("demo");
-
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(startMapOnCurrentPosistion);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-    x.innerHTML = position.coords.latitutde;
-//    var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude, 13);
-//    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-//    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-//    maxZoom: 18,
-//    id: 'mapbox.streets',
-//    accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
-//}).addTo(mymap);
+function startMapOnCurrentPosistion(position) {
+      
+    var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.outdoors',
+    accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
+}).addTo(mymap);
+    
+    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+    marker.bindPopup("<b>I am here!</b>").openPopup();
 }
 
 </script>
