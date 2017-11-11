@@ -3,12 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="refresh" content="120">
-        <meta name="description" content="... Pinamals">
+        <meta name="description" content="Account Login">
         <meta name="author" content="John Doe">
         <title>Pinamals - Login</title>
     </head>
 
     <body>
-        <p>here</p>
+        <form action="login.php" method="POST">
+            Email: <input name="email" type="email" placeholder="Enter your email">
+            Password: <input name="password" type="password" placeholder="Enter your password">
+            <button name="loginButton" type="submit">Submit</button>
+        </form>
+        
+        <form action="register.html" method="POST">
+            <button name="registerButton" type="submit">Register</button>
+        </form>
     </body>
 </html>
