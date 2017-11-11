@@ -26,12 +26,41 @@ function startMapOnCurrentPosistion(position) {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox.streets-satellite',
+    id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
 }).addTo(mymap);
     
     var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
     marker.bindPopup("<b>I am here!</b>").openPopup();
 }
-
 </script>
+<?php
+
+  function addSighting($user, $lat, $longi, $animal) {
+    $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+    $username = "pm3gaxazmj304hlq";
+    $password = "ob6dpkek4vwj75w7";
+    $dbname = "ou71kwcm2qpd3o88";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+
+    //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
+    $sql = "INSERT INTO sightings (user,lat,longitude,Animal) VALUES ('".$user."','".$lat."','".$longi."','".$animal."')";
+    //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+  }
+        addSighting('Andcast',12,12,'squirrle');
+
+?>
