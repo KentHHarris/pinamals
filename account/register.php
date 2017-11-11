@@ -22,7 +22,7 @@ require("../vendor/bjeavons/zxcvbn-php/src/Scorer.php");
 require("../vendor/bjeavons/zxcvbn-php/src/Zxcvbn.php");
 require('authconnect.php');
 
-//For testing: My#Password1!2@345
+//For testing:  My#Password1!2@345
 
 //Registration essentials
 $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
@@ -32,9 +32,9 @@ $confirm_password = filter_var($_POST['confirm_password'], FILTER_SANITIZE_STRIN
 //Account extras
 $first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
 $last_name = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
-$params = array("First name"=>$first_name, "Last name"=>$last_name);
+$params = array("FirstName" => "{$first_name}", "LastName" => "{$last_name}");
 
-$register = $auth->register($email, $password, $confirm_password, $params);
+$register = $auth->register($email, $password, $confirm_password, $params = array());
 
 if (!$register['error']) {
     header('Location: ./');
