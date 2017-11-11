@@ -1,36 +1,96 @@
-<head>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
-</head>
-<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
- <div id="mapid"></div>
-<p id="demo"></p>
-<script>
-getLocation();    
-var x = document.getElementById("demo");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(startMapOnCurrentPosistion);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function startMapOnCurrentPosistion(position) {
-      
-    var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets-satellite',
-    accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
-}).addTo(mymap);
-    
-    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
-    marker.bindPopup("<b>I am here!</b>").openPopup();
-}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">    
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+          <style>
+          .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+            background-color: #006400;
+            color: #FFFF;
+            padding: 1% 0;
+            font-size: 1.2em;
+            border: 0;
+          }
+          .navbar-brand{
+            float:left;
+            min-height: 55px;
+            padding: 0 15px 5px;
+          }
+        .navbar-inverse .navbar-nav .active a,
+        .navbar-inverse .navbar-nav .active a:focus,
+        .navbar-inverse .navbar-nav .active a:hover{
+          color: #FFF;
+          background-color: #006400;
+        }
 
-</script>
+        </style>
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+           crossorigin=""/>
+    </head>
+    
+    <body>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" name="button" class="navbar-toggle" data-toggle"collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="img/w3newbie.png"></a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contacts</a></li>
+              <li><a href="../account/">Log In</a></li>
+            </ul>
+        </div>
+        </div>
+      </nav>
+    </body>
+    
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+       integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+       crossorigin=""></script>
+     <div id="mapid"></div>
+    <p id="demo"></p>
+    
+    <script>
+
+    getLocation();    
+    var x = document.getElementById("demo");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(startMapOnCurrentPosistion);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+        
+    function startMapOnCurrentPosistion(position) {
+
+        var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets-satellite',
+        accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
+    }).addTo(mymap);
+
+        var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+        marker.openPopup();
+    }
+
+    </script>
+    
+</html>
