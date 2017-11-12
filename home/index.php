@@ -24,9 +24,9 @@ if (!$_SESSION['logged_in']) {
 ?>
 
 <html lang="en">
-    
+
     <head>
-        <meta charset="utf-8">    
+        <meta charset="utf-8">
         <meta http-equiv="refresh" content="160">
         <meta name="viewport" content="width=device-width, initial-scale=1">
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -62,9 +62,9 @@ if (!$_SESSION['logged_in']) {
            crossorigin=""/>
         <title>Pinamals</title>
     </head>
-    
+
     <body>
-    
+
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
@@ -75,7 +75,7 @@ if (!$_SESSION['logged_in']) {
           <h2>Add A Sighting</h2>
         </div>
         <div class="modal-body">
-         
+
           <form action="file.php" method="POST" enctype="multipart/form-data">
           <p>Category</p>
             <select name="Category">
@@ -83,23 +83,23 @@ if (!$_SESSION['logged_in']) {
             	<option value="wild">Wild</option>
             	<option value="domestic">Domestic</option>
             </select>
-              
+
           <p>Animal</p>
             <select name="Animal">
-    			<?php 
+    			<?php
 					$handle = fopen("drop.txt", "r");
 					if ($handle) {
     					while (($line = fgets($handle)) !== false) {
         					echo "<option value='".$line."'>'".$line."'</option>";
     					}
     					fclose($handle);
-					} 
+					}
 					else {
 						// error opening the file.
-					} 
-				?> 
+					}
+				?>
   			</select>
-              
+
           <p>Image</p>
 				<input type="file" name="file"><br><br>
                 <input id="la" name="la" value = "0" hidden >
@@ -110,7 +110,7 @@ if (!$_SESSION['logged_in']) {
         </div>
       </div>
     </div>
-        
+
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -119,7 +119,7 @@ if (!$_SESSION['logged_in']) {
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="img/w3newbie.png"></a>
+            <a class="navbar-brand" href="#"><img src="pinamals1.png"></a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
@@ -132,15 +132,15 @@ if (!$_SESSION['logged_in']) {
         </div>
         </div>
       </nav>
-        
+
     </body>
-    
+
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
        crossorigin=""></script>
      <div id="mapid"></div>
     <p id="demo"></p>
-    
+
     <?php
     $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
     $username = "pm3gaxazmj304hlq";
@@ -152,13 +152,13 @@ if (!$_SESSION['logged_in']) {
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    } 
-    $result = $conn->query("SELECT user,lat,longitude FROM sightings;"); 
-    
+    }
+    $result = $conn->query("SELECT user,lat,longitude FROM sightings;");
+
     $lats = array();
     $longs = array();
     $users = array();
-    $count = 0;           
+    $count = 0;
     while($row = mysqli_fetch_assoc($result))
         {
            $lats[$count] = $row['lat'];
@@ -167,12 +167,12 @@ if (!$_SESSION['logged_in']) {
         $count += 1;
         }
 
-          
+
     ?>
-    
+
     <script type=text/javascript>
 
-    getLocation();    
+    getLocation();
     var x = document.getElementById("demo");
     function getLocation() {
         if (navigator.geolocation) {
@@ -181,7 +181,7 @@ if (!$_SESSION['logged_in']) {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
-        
+
     function startMapOnCurrentPosistion(position) {
         var la = position.coords.latitude;
         var lo = position.coords.latitude;
@@ -194,7 +194,7 @@ if (!$_SESSION['logged_in']) {
     }).addTo(mymap);
         document.getElementById("la").value = position.coords.latitude;
         document.getElementById("lo").value = position.coords.longitude;
-       
+
         <?php
             $count = count($lats);
             $arrLats = json_encode($lats);
@@ -212,9 +212,9 @@ if (!$_SESSION['logged_in']) {
            .openPopup();
             i+=1;
         }
-    
+
    }
-   
+
     // Get the modal
     var modal = document.getElementById('myModal');
 
@@ -224,7 +224,7 @@ if (!$_SESSION['logged_in']) {
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks on the button, open the modal 
+    // When the user clicks on the button, open the modal
     btn.onclick = function() {
         <?php if ($_SESSION['logged_in'] == false) { ?>
             alert("Must be logged in to add a pin.");
@@ -246,5 +246,5 @@ if (!$_SESSION['logged_in']) {
     }
 
     </script>
-    
+
 </html>
