@@ -26,7 +26,7 @@ function startMapOnCurrentPosistion(position) {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox.streets',
+    id: 'mapbox.pencil',
     accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
 }).addTo(mymap);
     
@@ -50,7 +50,7 @@ function startMapOnCurrentPosistion(position) {
     } 
 
     //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
-    $sql = "INSERT INTO sightings (user,lat,longitude,Animal) VALUES ('".$user."','".$lat."','".$longi."','".$animal."')";
+    $sql = "INSERT INTO sightings (user,lat,longitude,Animal) VALUES ('".$user."','".$lat."','".$longi."','".$user."')";
     //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
 
     if ($conn->query($sql) === TRUE) {
