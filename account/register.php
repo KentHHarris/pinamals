@@ -31,9 +31,9 @@ $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 $confirm_password = filter_var($_POST['confirm_password'], FILTER_SANITIZE_STRING);
 
 //Account extras
-$username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-$first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
-$last_name = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
+$username = ucfirst(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
+$first_name = ucfirst(filter_var($_POST['first_name'], FILTER_SANITIZE_STRING));
+$last_name = ucfirst(filter_var($_POST['last_name'], FILTER_SANITIZE_STRING));
 $params = array("Username" => "{$username}", "FirstName" => "{$first_name}", "LastName" => "{$last_name}");
 
 $register = $auth->register($email, $password, $confirm_password);
