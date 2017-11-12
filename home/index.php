@@ -11,7 +11,6 @@ require("../account/authconnect.php");
 
 if (!$_SESSION['logged_in']) {
     //shows login button
-   
     $value = 'Login';
     $href = '../account/';
 } else {
@@ -227,7 +226,11 @@ if (!$_SESSION['logged_in']) {
 
     // When the user clicks on the button, open the modal 
     btn.onclick = function() {
-        modal.style.display = "block";
+        <?php if ($_SESSION['logged_in'] == false) { ?>
+            alert("Must be logged in to add a pin.");
+        <?php } else { ?>
+            modal.style.display = "block";
+        <?php } ?>
     }
 
     // When the user clicks on <span> (x), close the modal
