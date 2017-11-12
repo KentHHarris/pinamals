@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <?php
+
 session_start();
+
 if (!$_SESSION['logged_in']) {
+    //shows login button
+    $value = 'Login';
+    $href = '../account/';
+} else {
+    //shows profile button
+    $value = 'Logout';
+    $href = '../account/logout.php';
 }
+
 ?>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">    
@@ -39,6 +50,7 @@ if (!$_SESSION['logged_in']) {
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
            integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
            crossorigin=""/>
+        <title>Pinamals</title>
     </head>
     
     <body>
@@ -63,7 +75,6 @@ if (!$_SESSION['logged_in']) {
             <button>Upload</button>
         </div>
       </div>
-
     </div>
         
       <nav class="navbar navbar-inverse">
@@ -81,12 +92,14 @@ if (!$_SESSION['logged_in']) {
               <li class="active"><a href="#">Home</a></li>
               <li><a id="buttonAdd">Add</a><li>
               <li><a href="./about/">About</a></li>
-              <li><a href="../account/">Log In</a></li>
+              <li><a href="<?php echo $href ?>"><?php echo $value ?></a></li>
             </ul>
         </div>
         </div>
       </nav>
+        
     </body>
+    
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
        crossorigin=""></script>
