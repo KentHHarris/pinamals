@@ -1,5 +1,12 @@
 #mapid { height: 89vh; }
 
+p {
+font-family:arial;
+font-size:14px;
+margin-left:5px;
+margin-top: 10px;
+Margin-bottom:1px;
+}
 .modal-header {
     padding: 2px 16px;
     background-color: #5cb85c;
