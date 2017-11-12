@@ -65,17 +65,20 @@ if (!$_SESSION['logged_in']) {
           <h2>Add A Sighting</h2>
         </div>
         <div class="modal-body">
-          <p>Category</p>
-            <input>
-          <p>Species</p>
-            <input>
-          <p>Animal</p>
-            <input>
-          <p>Image</p>
+         
           <form action="file.php" method="POST" enctype="multipart/form-data">
-
+          <p>Category</p>
+            <input name = "Category">
+          <p>Species</p>
+            <input name = "Species">
+          <p>Animal</p>
+            <input name = "Animal">
+          <p>Image</p>
 				<input type="file" name="file"><br><br>
+                <input id="la" name="la" value = "0" hidden >
+                <input id="lo" name="lo" value = "0" hidden >
 				<input type="submit" value="Submit">
+                
 
           </form>
         </div>
@@ -124,14 +127,17 @@ if (!$_SESSION['logged_in']) {
     }
         
     function startMapOnCurrentPosistion(position) {
-
-        var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
+        var la = position.coords.latitude;
+        var lo = position.coords.latitude;
+        var mymap = L.map('mapid').setView([la, position.coords.longitude], 13);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets-satellite',
         accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
     }).addTo(mymap);
+        document.getElementById("la").value = position.coords.latitude;
+        document.getElementById("lo").value = position.coords.longitude;
 
         var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
         marker.openPopup();
