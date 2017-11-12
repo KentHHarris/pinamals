@@ -7,21 +7,51 @@
         <meta name="author" content="John Doe">
         <title>Pinamals - Login</title>
         <style>
-        </style>
-        <div align="center">
+        html {
+        background-image: url(http://foresteurope.org/wp-content/uploads/2016/09/103055DSC0172ssw2-1024x685.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .back{
+        margin: 0;
+        background-size: auto;
+        background-color: #fff;
 
-        </div>
+        position: absolute;
+        border-style: solid;
+        border-width: thick;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+
+      }
+
+        </style>
+</body>
     </head>
 
     <body>
-        <form action="login.php" method="POST" align="center">
-            Email: <input name="email" type="email" placeholder="Enter your email">
-            Password: <input name="password" type="password" placeholder="Enter your password">
-            <button name="loginButton" type="submit">Submit</button>
-        </form>
+      <div class="box">
+        <div class="back">
 
-        <form action="register.html" method="POST">
-            <button name="registerButton" type="submit" align="center">Register</button>
-        </form>
+
+          <form action="login.php" method="POST" align="center">
+              Email: <input name="email" type="email" placeholder="Enter your email">
+            </form>
+
+              <form action="login.php" method="POST" align="center">
+                Password: <input name="password" type="password" placeholder="Enter your password" align=>
+              </form>
+              <form action="login.php" method="POST" align="center">
+                <button name="loginButton" type="submit">Submit</button>
+              </form>
+
+              <form action="register.html" method="POST" align="center">
+                <button name="registerButton" type="submit">Register</button>
+              </form>
+          </div>
+        </div>
+
     </body>
 </html>
