@@ -11,12 +11,13 @@ require("../account/authconnect.php");
 
 if (!$_SESSION['logged_in']) {
     //shows login button
-    $sessionEmail = $_SESSION['email'];
-    $uid = $auth->getUID($sessionEmail);
+   
     $value = 'Login';
     $href = '../account/';
 } else {
     //shows profile button
+    $sessionEmail = $_SESSION['email'];
+    $uid = $auth->getUID($sessionEmail);
     $value = 'Logout';
     $href = '../account/logout.php';
 }
