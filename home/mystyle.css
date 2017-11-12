@@ -1,4 +1,4 @@
-#mapid { height: 650px; }
+#mapid { height: 625px; }
 
 .modal-header {
     padding: 2px 16px;
@@ -33,7 +33,7 @@
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top: -300px; opacity: 0} 
+    from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
 }
 
