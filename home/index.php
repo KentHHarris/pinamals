@@ -1583,8 +1583,6 @@ if (!$_SESSION['logged_in']) {
                 <input id="lo" name="lo" value = "0" hidden >
                 <input id="uid" name="uid" value = '<?php echo $uid ?>' hidden >
 				<input type="submit" value="Submit">
-                
-
           </form>
         </div>
       </div>

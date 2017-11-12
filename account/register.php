@@ -20,6 +20,7 @@ require("../vendor/bjeavons/zxcvbn-php/src/Searcher.php");
 require("../vendor/bjeavons/zxcvbn-php/src/ScorerInterface.php");
 require("../vendor/bjeavons/zxcvbn-php/src/Scorer.php");
 require("../vendor/bjeavons/zxcvbn-php/src/Zxcvbn.php");
+
 require('authconnect.php');
 
 //For testing:  My#Password1!2@345
