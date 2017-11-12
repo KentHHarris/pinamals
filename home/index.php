@@ -120,7 +120,21 @@ if (!$_SESSION['logged_in']) {
        crossorigin=""></script>
      <div id="mapid"></div>
     <p id="demo"></p>
-    
+    <?php
+    $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+    $username = "pm3gaxazmj304hlq";
+    $password = "ob6dpkek4vwj75w7";
+    $dbname = "ou71kwcm2qpd3o88";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    $result = $conn->query("SELECT lat,longitude FROM sightings;");
+                  
+    ?>
     <script>
 
     getLocation();    
@@ -143,8 +157,16 @@ if (!$_SESSION['logged_in']) {
         id: 'mapbox.streets-satellite',
         accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
     }).addTo(mymap);
-        document.getElementById("la").value = position.coords.latitude;
-        document.getElementById("lo").value = position.coords.longitude;
+        <?php
+        if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {?>
+             var marker = L.marker([<?php echo $row["lat"]?>,<?php echo $row["longitude"]?>]).addTo(mymap);
+        <?php
+        }
+    } else {
+            echo "0 results";
+    } ?>
    }
         
     // Get the modal
