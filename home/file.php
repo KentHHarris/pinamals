@@ -36,8 +36,11 @@
         //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
         $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Animal) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$animal."')";
         //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
+        
+        //Add Points & Update Amount of Posts in user_info
 
         if ($conn->query($sql) === TRUE) {
+            $conn->query('INSERT INTO user_info (num_of_posts, points_allocated) VALUES (1, 2)');
             header('Location: ./');
             exit();
         } else {
