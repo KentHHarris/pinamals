@@ -176,7 +176,8 @@ if (!$_SESSION['logged_in']) {
         // output data of each row
         while($row = $result->fetch_assoc()) {?>
              var marker = L.marker([<?php echo $row["lat"]?>,<?php echo $row["longitude"]?>]).addTo(mymap)
-	        .bindPopup('<?php echo $row["user"]?>')
+	        .bindPopup('<?php echo $row["user"]?>'  
+                       + "<img src=https://vignette.wikia.nocookie.net/narutomasters/images/0/04/Asdsa.png/revision/latest?cb=20131231063012>",{ maxWidth: "auto"})
 	        .openPopup()
             .autoPan(false);
 
