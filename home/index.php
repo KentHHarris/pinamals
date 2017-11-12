@@ -95,7 +95,7 @@ if (!$_SESSION['logged_in']) {
 				<input type="file" name="file"><br><br>
                 <input id="la" name="la" value = "0" hidden >
                 <input id="lo" name="lo" value = "0" hidden >
-                <input id="userId" name="userId" value = '<?php echo $uid ?>' hidden >
+                <input id="uid" name="uid" value = '<?php echo $uid ?>' hidden >
 				<input type="submit" value="Submit">
           </form>
         </div>
@@ -117,6 +117,7 @@ if (!$_SESSION['logged_in']) {
               <li class="active"><a href="#">Home</a></li>
               <li><a id="buttonAdd">Add</a><li>
               <li><a href="./about/">About</a></li>
+              <li><a href="<?php if ($_SESSION['logged_in']) { echo "../account/profile/"; } ?>">Profile</a></li>
               <li><a href="<?php echo $href ?>"><?php echo $value ?></a></li>
             </ul>
         </div>
@@ -130,6 +131,21 @@ if (!$_SESSION['logged_in']) {
        crossorigin=""></script>
      <div id="mapid"></div>
     <p id="demo"></p>
+    
+    <?php
+    $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+    $username = "pm3gaxazmj304hlq";
+    $password = "ob6dpkek4vwj75w7";
+    $dbname = "ou71kwcm2qpd3o88";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    $result = $conn->query("SELECT lat,longitude FROM sightings;");                 
+    ?>
     
     <script>
 
@@ -155,6 +171,16 @@ if (!$_SESSION['logged_in']) {
     }).addTo(mymap);
         document.getElementById("la").value = position.coords.latitude;
         document.getElementById("lo").value = position.coords.longitude;
+        <?php
+        if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {?>
+             var marker = L.marker([<?php echo $row["lat"]?>,<?php echo $row["longitude"]?>]).addTo(mymap);
+        <?php
+        }
+    } else {
+            echo "0 results";
+    } ?>
    }
         
     // Get the modal
