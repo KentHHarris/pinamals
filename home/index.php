@@ -83,7 +83,7 @@ if (!$_SESSION['logged_in']) {
             	<option value="wild">Wild</option>
             	<option value="domestic">Domestic</option>
             </select>
-              <span></span>
+              
           <p>Animal</p>
             <select name="Animal">
     			<?php 
@@ -99,6 +99,7 @@ if (!$_SESSION['logged_in']) {
 					} 
 				?> 
   			</select>
+              
           <p>Image</p>
 				<input type="file" name="file"><br><br>
                 <input id="la" name="la" value = "0" hidden >
