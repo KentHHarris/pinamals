@@ -7,7 +7,7 @@
         $userId = $_POST['uid'];
 		$tmp_name = $_FILES['file']['tmp_name'];
 		
-        move_uploaded_file($tmp_name,$locations.$name) or die('Failed to upload the file.');
+        move_uploaded_file($tmp_name,$locations.$name);
         $file_directory = $locations.$name;
         addSighting($userId,$lat,$lo,$anim,$cat,$file_directory);
     
@@ -37,10 +37,21 @@
         $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Animal,file_dir) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$animal."','".$file_directory."')";
         //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
         
-        //Add Points & Update Amount of Posts in user_info
+        $result1 = $conn->query("SELECT points_allocated FROM user_info WHERE uid = '$userID'");
+        $result2 = $conn->query("SELECT num_of_posts FROM user_info WHERE uid = '$userID'");
+        $amountOfPoints = mysqli_fetch_assoc($result1);
+        $amountOfPosts = mysqli_fetch_assoc($result2);
 
+        //Add Points & Update Amount of Posts in user_info
         if ($conn->query($sql) === TRUE) {
-            $conn->query('INSERT INTO user_info (num_of_posts, points_allocated) VALUES (1, 2)');
+            
+            $x = $amountOfPoints['points_allocated'];
+            $x += 2;
+            $y = $amountOfPosts['num_of_posts'];
+            $y += 1;
+    
+            $conn->query("UPDATE user_info SET points_allocated = $x, num_of_posts = $y WHERE uid = $userID");
+            
             header('Location: ./');
             exit();
         } else {
@@ -51,13 +62,3 @@
   }
 
 ?>
-
-
-
- 
-<form action="file.php" method="POST" enctype="multipart/form-data">
-
-<input type="file" name="file"><br><br>
-<input type="submit" value="Submit">
-
-</form>
