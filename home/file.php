@@ -8,13 +8,13 @@
 		$tmp_name = $_FILES['file']['tmp_name'];
 		
         move_uploaded_file($tmp_name,$locations.$name) or die('Failed to upload the file.');
-    
-    addSighting($userId,$lat,$lo,$anim,$cat);
+        $file_directory = $locations.$name;
+        addSighting($userId,$lat,$lo,$anim,$cat,$file_directory);
     
     //Adds a sighting to the sighting database, needs user, latitude,longitude,animal,category,species
 
 
-    function addSighting($userID, $lat, $longi, $animal, $category) {
+    function addSighting($userID, $lat, $longi, $animal, $category,$file_directory) {
         $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
         $username = "pm3gaxazmj304hlq";
         $password = "ob6dpkek4vwj75w7";
@@ -34,7 +34,7 @@
         }
         
         //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
-        $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Animal) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$animal."')";
+        $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Animal,file_dir) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$animal."','".$file_directory."')";
         //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
         
         //Add Points & Update Amount of Posts in user_info

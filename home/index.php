@@ -64,10 +64,9 @@ if (!$_SESSION['logged_in']) {
     </head>
 
     <body>
-
     <!-- The Modal -->
     <div id="myModal" class="modal">
-
+        
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
@@ -153,17 +152,19 @@ if (!$_SESSION['logged_in']) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $result = $conn->query("SELECT user,lat,longitude FROM sightings;");
+    $result = $conn->query("SELECT user,lat,longitude,file_dir FROM sightings;");
 
     $lats = array();
     $longs = array();
     $users = array();
+    $image_paths = array();
     $count = 0;
     while($row = mysqli_fetch_assoc($result))
         {
            $lats[$count] = $row['lat'];
            $longs[$count] = $row['longitude'];
            $users[$count] = $row['user'];
+           $images_paths[$count] = $row['file_dir'];
         $count += 1;
         }
 
@@ -200,15 +201,18 @@ if (!$_SESSION['logged_in']) {
             $arrLats = json_encode($lats);
             $arrLongs = json_encode($longs);
             $arrUsers = json_encode($users);
+            $arrImPath = json_encode($images_paths);
             echo " var jsArrLat = ".$arrLats. ";\n";
             echo " var jsArrLong = ".$arrLongs. ";\n";
             echo " var jsArrUser = ".$arrUsers. ";\n";
+            echo " var jsArrPath= ".$arrImPath. ";\n";
             echo " var counter = ".$count.";\n";
         ?>
         var i = 0;
         while(i < counter){
             var marker = new L.marker([jsArrLat[i],jsArrLong[i]]).addTo(mymap)
-           .bindPopup(jsArrUser[i])
+          .bindPopup(jsArrUser[i]    
+                        + "<img src=files/" + jsArrPath[i] + " />",{ maxWidth: "auto"})
            .openPopup();
             i+=1;
         }

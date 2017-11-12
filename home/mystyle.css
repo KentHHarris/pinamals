@@ -7,6 +7,12 @@ margin-left:5px;
 margin-top: 10px;
 Margin-bottom:1px;
 }
+
+.popupImage {
+    max-width: 50px;
+    max-height: 50px;
+}
+
 .modal-header {
     padding: 2px 16px;
     background-color: #5cb85c;
