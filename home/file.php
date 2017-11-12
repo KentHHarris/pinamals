@@ -3,28 +3,11 @@
 		$lat = $_POST['la'];
         $lo = $_POST['lo'];
         $cat = $_POST['Category'];
-         
         $anim = $_POST['Animal'];
         $userId = $_POST['uid'];
 		$tmp_name = $_FILES['file']['tmp_name'];
 		
-        
-		if (isset($name)) {
-			if (!empty($name)){
-				$locations = './files/';
-			
-				if (move_uploaded_file($tmp_name,$locations.$name)){
-					echo 'uploaded!';
-				}
-				else {
-					echo 'there was an error.';
-				}
-			}	
-			
-			else {
-				echo "please choose a file.";
-			}
-		}
+        move_uploaded_file($tmp_name,$locations.$name) or die('Failed to upload the file.');
     
     addSighting($userId,$lat,$lo,$anim,$cat);
     
@@ -48,8 +31,6 @@
         if ($result->num_rows > 0) {
         // output data of each row
         $row = $result->fetch_assoc();
-        } else {
-            echo "0 results";
         }
         
         //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
@@ -57,7 +38,8 @@
         //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            header('Location: ./');
+            exit();
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
