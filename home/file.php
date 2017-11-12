@@ -3,7 +3,7 @@
 		$lat = $_POST['la'];
         $lo = $_POST['lo'];
         $cat = $_POST['Category'];
-        $spec = $_POST['Species']; 
+         
         $anim = $_POST['Animal'];
         $userId = $_POST['uid'];
 		$tmp_name = $_FILES['file']['tmp_name'];
@@ -26,12 +26,12 @@
 			}
 		}
     
-    addSighting($userId,$lat,$lo,$anim,$cat,$spec);
+    addSighting($userId,$lat,$lo,$anim,$cat);
     
     //Adds a sighting to the sighting database, needs user, latitude,longitude,animal,category,species
 
 
-    function addSighting($userID, $lat, $longi, $animal, $category, $specie) {
+    function addSighting($userID, $lat, $longi, $animal, $category) {
         $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
         $username = "pm3gaxazmj304hlq";
         $password = "ob6dpkek4vwj75w7";
@@ -53,7 +53,7 @@
         }
         
         //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
-        $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Species,Animal) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$specie."','".$animal."')";
+        $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Animal) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$animal."')";
         //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
 
         if ($conn->query($sql) === TRUE) {

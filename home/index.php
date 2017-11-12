@@ -90,7 +90,7 @@ if (!$_SESSION['logged_in']) {
 					$handle = fopen("drop.txt", "r");
 					if ($handle) {
     					while (($line = fgets($handle)) !== false) {
-        					echo "<option value=".$line.">".$line."</option>";
+        					echo "<option value='".$line."'>'".$line."'</option>";
     					}
     					fclose($handle);
 					} 
