@@ -211,9 +211,9 @@ if (!$_SESSION['logged_in']) {
         var i = 0;
         while(i < counter){
             var marker = new L.marker([jsArrLat[i],jsArrLong[i]]).addTo(mymap)
-          .bindPopup(jsArrUser[i]    
-                        + "<img src=files/" + jsArrPath[i] + " />",{ maxWidth: "auto"})
-           .openPopup();
+           .bindPopup(jsArrUser[i]    
+                        + "<img src=files/" + jsArrPath[i] + " />", {maxWidth: "auto"});
+           
             i+=1;
         }
 

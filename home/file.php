@@ -8,6 +8,7 @@
 		$tmp_name = $_FILES['file']['tmp_name'];
 		
         move_uploaded_file($tmp_name,$locations.$name) or die('Failed to upload the file.');
+
         $file_directory = $locations.$name;
         addSighting($userId,$lat,$lo,$anim,$cat,$file_directory);
     
