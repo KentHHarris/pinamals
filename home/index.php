@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 require("../account/authconnect.php");
@@ -149,10 +151,24 @@ if (!$_SESSION['logged_in']) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } 
-    $result = $conn->query("SELECT user,lat,longitude FROM sightings;");                 
+    $result = $conn->query("SELECT user,lat,longitude FROM sightings;"); 
+    
+    $lats = array();
+    $longs = array();
+    $users = array();
+    $count = 0;           
+    while($row = mysqli_fetch_assoc($result))
+        {
+           $lats[$count] = $row['lat'];
+           $longs[$count] = $row['longitude'];
+           $users[$count] = $row['user'];
+        $count += 1;
+        }
+
+          
     ?>
     
-    <script>
+    <script type=text/javascript>
 
     getLocation();    
     var x = document.getElementById("demo");
@@ -167,7 +183,7 @@ if (!$_SESSION['logged_in']) {
     function startMapOnCurrentPosistion(position) {
         var la = position.coords.latitude;
         var lo = position.coords.latitude;
-        var mymap = L.map('mapid').setView([la, position.coords.longitude], 13);
+        var mymap = L.map('mapid').setView([la, position.coords.longitude], 12);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
@@ -176,23 +192,27 @@ if (!$_SESSION['logged_in']) {
     }).addTo(mymap);
         document.getElementById("la").value = position.coords.latitude;
         document.getElementById("lo").value = position.coords.longitude;
+       
         <?php
-        if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {?>
-             var marker = L.marker([<?php echo $row["lat"]?>,<?php echo $row["longitude"]?>]).addTo(mymap)
-	        .bindPopup('<?php echo $row["user"]?>'  
-                       + "<img src=https://vignette.wikia.nocookie.net/narutomasters/images/0/04/Asdsa.png/revision/latest?cb=20131231063012>",{ maxWidth: "auto"})
-	        .openPopup()
-            .autoPan(false);
-
-        <?php
+            $count = count($lats);
+            $arrLats = json_encode($lats);
+            $arrLongs = json_encode($longs);
+            $arrUsers = json_encode($users);
+            echo " var jsArrLat = ".$arrLats. ";\n";
+            echo " var jsArrLong = ".$arrLongs. ";\n";
+            echo " var jsArrUser = ".$arrUsers. ";\n";
+            echo " var counter = ".$count.";\n";
+        ?>
+        var i = 0;
+        while(i < counter){
+            var marker = new L.marker([jsArrLat[i],jsArrLong[i]]).addTo(mymap)
+           .bindPopup(jsArrUser[i])
+           .openPopup();
+            i+=1;
         }
-            
-
-    } else {
-            echo "0 results";
-    } ?>
+        console.log(jsArrUser);
+        console.log(counter);
+    
    }
    
     // Get the modal
