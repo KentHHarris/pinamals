@@ -83,7 +83,8 @@ if (!$_SESSION['logged_in']) {
             	<option value="wild">Wild</option>
             	<option value="domestic">Domestic</option>
             </select>
-          <p>Species</p>
+              <span></span>
+          <p>Animal</p>
             <select name="Animal">
     			<?php 
 					$handle = fopen("drop.txt", "r");
