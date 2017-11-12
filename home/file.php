@@ -5,7 +5,7 @@
         $cat = $_POST['Category'];
         $spec = $_POST['Species']; 
         $anim = $_POST['Animal'];
-        $userId = $_POST['userId'];
+        $userId = $_POST['uid'];
 		$tmp_name = $_FILES['file']['tmp_name'];
 		
         
