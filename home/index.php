@@ -7,11 +7,6 @@ require("../account/authconnect.php");
 
 $sessionEmail = $_SESSION['email'];
 $uid = $auth->getUID($sessionEmail);
-$user = $auth->getUser($uid);
-
-//var_dump($user);
-$userId = $user["id"];
-//echo $username;
 
 if (!$_SESSION['logged_in']) {
     //shows login button
@@ -87,7 +82,7 @@ if (!$_SESSION['logged_in']) {
 				<input type="file" name="file"><br><br>
                 <input id="la" name="la" value = "0" hidden >
                 <input id="lo" name="lo" value = "0" hidden >
-                <input id="userId" name="userId" value = '<?php echo $userId ?>' hidden >
+                <input id="userId" name="userId" value = '<?php echo $uid ?>' hidden >
 				<input type="submit" value="Submit">
                 
 
