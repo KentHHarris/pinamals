@@ -37,10 +37,10 @@ $last_name = ucfirst(filter_var($_POST['last_name'], FILTER_SANITIZE_STRING));
 $params = array("Username" => "{$username}", "FirstName" => "{$first_name}", "LastName" => "{$last_name}");
 
 $register = $auth->register($email, $password, $confirm_password);
-$uid = $auth->getUID($email);
-$dbh->query("INSERT INTO user_info(uid,username,first_name,last_name) VALUES('".$uid."','".$params['Username']."','".$params['FirstName']."','".$params['LastName']."' )");
 
 if (!$register['error']) {
+    $uid = $auth->getUID($email);
+    $dbh->query("INSERT INTO user_info(uid,username,first_name,last_name) VALUES('".$uid."','".$params['Username']."','".$params['FirstName']."','".$params['LastName']."' )");
     header('Location: ./');
     exit();
 } else {
