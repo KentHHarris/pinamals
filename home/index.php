@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 session_start();
 
 require("../account/authconnect.php");
@@ -22,6 +24,7 @@ if (!$_SESSION['logged_in']) {
 ?>
 
 <html lang="en">
+    
     <head>
         <meta charset="utf-8">    
         <meta http-equiv="refresh" content="160">
@@ -209,8 +212,6 @@ if (!$_SESSION['logged_in']) {
            .openPopup();
             i+=1;
         }
-        console.log(jsArrUser);
-        console.log(counter);
     
    }
    
