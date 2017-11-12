@@ -82,7 +82,7 @@ if (!$_SESSION['logged_in']) {
 				<input type="file" name="file"><br><br>
                 <input id="la" name="la" value = "0" hidden >
                 <input id="lo" name="lo" value = "0" hidden >
-                <input id="userId" name="userId" value = '<?php echo $uid ?>' hidden >
+                <input id="uid" name="uid" value = '<?php echo $uid ?>' hidden >
 				<input type="submit" value="Submit">
                 
 
@@ -157,6 +157,8 @@ if (!$_SESSION['logged_in']) {
         id: 'mapbox.streets-satellite',
         accessToken: 'pk.eyJ1IjoiYW5kY2FzdCIsImEiOiJjajl2cmx6OHQxYzZwMnJwYzd6MGx4YTBzIn0.Rio1VOW1ZAVkCxwZ2Oz2NQ'
     }).addTo(mymap);
+        document.getElementById("la").value = position.coords.latitude;
+        document.getElementById("lo").value = position.coords.longitude;
         <?php
         if ($result->num_rows > 0) {
         // output data of each row

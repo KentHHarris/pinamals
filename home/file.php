@@ -25,8 +25,9 @@
 				echo "please choose a file.";
 			}
 		}
+    
     addSighting($userId,$lat,$lo,$anim,$cat,$spec);
-
+    
     //Adds a sighting to the sighting database, needs user, latitude,longitude,animal,category,species
 
 
@@ -42,7 +43,6 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         } 
-        echo $userID;
         $result = $conn->query("SELECT username FROM user_info WHERE uid = $userID; ");
         
         if ($result->num_rows > 0) {
@@ -50,10 +50,10 @@
         $row = $result->fetch_assoc();
         } else {
             echo "0 results";
-    }
+        }
         
         //$sql = "INSERT INTO sightings (user,lat,Animal)VALUES ('John', 65.4,'squirrle')";
-        $sql = "INSERT INTO sightings (user,lat,longitude,Category,Species,Animal) VALUES ('".$row[username]."','".$lat."','".$longi."','".$category."','".$specie."','".$animal."')";
+        $sql = "INSERT INTO sightings (uid,user,lat,longitude,Category,Species,Animal) VALUES ('".$userID."','".$row[username]."','".$lat."','".$longi."','".$category."','".$specie."','".$animal."')";
         //$sql = "INSERT INTO sightings (user,lat) VALUES ('Andcast','22.013')";
 
         if ($conn->query($sql) === TRUE) {
