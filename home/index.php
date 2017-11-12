@@ -5,11 +5,10 @@ session_start();
 
 require("../account/authconnect.php");
 
-$sessionEmail = $_SESSION['email'];
-$uid = $auth->getUID($sessionEmail);
-
 if (!$_SESSION['logged_in']) {
     //shows login button
+    $sessionEmail = $_SESSION['email'];
+    $uid = $auth->getUID($sessionEmail);
     $value = 'Login';
     $href = '../account/';
 } else {
