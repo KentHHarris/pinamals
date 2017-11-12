@@ -106,6 +106,7 @@ if (!$_SESSION['logged_in']) {
               <li class="active"><a href="#">Home</a></li>
               <li><a id="buttonAdd">Add</a><li>
               <li><a href="./about/">About</a></li>
+              <li><a href="<?php if ($_SESSION['logged_in']) { echo "../account/profile/"; } ?>">Profile</a></li>
               <li><a href="<?php echo $href ?>"><?php echo $value ?></a></li>
             </ul>
         </div>
