@@ -26,7 +26,7 @@
 		}
     addSighting("andrew",$lat,$lo,$anim,$cat,$spec);
 
-
+    //Adds a sighting to the sighting database, needs user, latitude,longitude,animal,category,species
     function addSighting($user, $lat, $longi, $animal, $category, $specie) {
         $servername = "xq7t6tasopo9xxbs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
         $username = "pm3gaxazmj304hlq";

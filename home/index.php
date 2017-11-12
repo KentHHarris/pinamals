@@ -138,10 +138,7 @@ if (!$_SESSION['logged_in']) {
     }).addTo(mymap);
         document.getElementById("la").value = position.coords.latitude;
         document.getElementById("lo").value = position.coords.longitude;
-
-        var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
-        marker.openPopup();
-    }
+   }
         
     // Get the modal
     var modal = document.getElementById('myModal');
