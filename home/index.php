@@ -72,7 +72,12 @@ if (!$_SESSION['logged_in']) {
           <p>Animal</p>
             <input>
           <p>Image</p>
-            <button>Upload</button>
+          <form action="file.php" method="POST" enctype="multipart/form-data">
+
+				<input type="file" name="file"><br><br>
+				<input type="submit" value="Submit">
+
+          </form>
         </div>
       </div>
     </div>
