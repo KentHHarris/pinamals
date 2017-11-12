@@ -73,7 +73,11 @@ if (!$_SESSION['logged_in']) {
          
           <form action="file.php" method="POST" enctype="multipart/form-data">
           <p>Category</p>
-            <input name = "Category">
+            <select name="Species">
+            	<option value="zoo">Zoo</option>
+            	<option value="wild">Wild</option>
+            	<option value="domestic">Domestic</option>
+            </select>
           <p>Species</p>
             <select name="Species">
     			<?php 
