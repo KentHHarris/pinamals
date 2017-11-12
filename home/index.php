@@ -78,13 +78,13 @@ if (!$_SESSION['logged_in']) {
          
           <form action="file.php" method="POST" enctype="multipart/form-data">
           <p>Category</p>
-            <select name="Species">
+            <select name="Category">
             	<option value="zoo">Zoo</option>
             	<option value="wild">Wild</option>
             	<option value="domestic">Domestic</option>
             </select>
           <p>Species</p>
-            <select name="Species">
+            <select name="Animal">
     			<?php 
 					$handle = fopen("drop.txt", "r");
 					if ($handle) {
@@ -98,8 +98,6 @@ if (!$_SESSION['logged_in']) {
 					} 
 				?> 
   			</select>
-          <p>Animal</p>
-            <input name = "Animal">
           <p>Image</p>
 				<input type="file" name="file"><br><br>
                 <input id="la" name="la" value = "0" hidden >
