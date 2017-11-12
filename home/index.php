@@ -74,7 +74,11 @@ if (!$_SESSION['logged_in']) {
          
           <form action="file.php" method="POST" enctype="multipart/form-data">
           <p>Category</p>
-            <input name = "Category">
+            <select name="Species">
+            	<option value="zoo">Zoo</option>
+            	<option value="wild">Wild</option>
+            	<option value="domestic">Domestic</option>
+            </select>
           <p>Species</p>
             <select name="Species">
     			<?php 
@@ -145,7 +149,7 @@ if (!$_SESSION['logged_in']) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } 
-    $result = $conn->query("SELECT lat,longitude FROM sightings;");                 
+    $result = $conn->query("SELECT user,lat,longitude FROM sightings;");                 
     ?>
     
     <script>
@@ -176,14 +180,20 @@ if (!$_SESSION['logged_in']) {
         if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {?>
-             var marker = L.marker([<?php echo $row["lat"]?>,<?php echo $row["longitude"]?>]).addTo(mymap);
+             var marker = L.marker([<?php echo $row["lat"]?>,<?php echo $row["longitude"]?>]).addTo(mymap)
+	        .bindPopup('<?php echo $row["user"]?>')
+	        .openPopup()
+            .autoPan(false);
+
         <?php
         }
+            
+
     } else {
             echo "0 results";
     } ?>
    }
-        
+   
     // Get the modal
     var modal = document.getElementById('myModal');
 

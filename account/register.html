@@ -6,21 +6,50 @@
         <meta name="description" content="Account Registration">
         <meta name="author" content="John Doe">
         <title>Pinamals - Register</title>
+        <style>
+        html {
+        background-image: url(http://foresteurope.org/wp-content/uploads/2016/09/103055DSC0172ssw2-1024x685.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .back{
+        margin: 0;
+        background-size: auto;
+        background-color: #fff;
+
+        position: absolute;
+        border-style: solid;
+        border-width: thick;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+
+      }
+        </style>
     </head>
 
     <body>
+      <div class="back">
         <form action="register.php" method="POST">
             Username: <input name="username" text="text" placeholder="Enter your username">
             First Name: <input name="first_name" type="text" placeholder="Enter your first name">
+          </form>
+          <form action="register.php" method="POST">
             Last Name: <input name="last_name" type="text" placeholder="Enter your last name">
             Email: <input name="email" type="email" placeholder="Enter your email">
+          </form>
+          <form action="register.php" method="POST">
             Password: <input name="password" type="password" placeholder="Enter your password">
             Confirm Password: <input name="confirm_password" type="password" placeholder="Confirm your password">
+          </form>
+          <form action="register.php" method="POST" align="center">
             <button name="registerButton" type="submit">Submit</button>
         </form>
-        
+
         <form action="index.html" method="POST">
             <button name="backButton" type="submit">Back</button>
         </form>
+      </div>
     </body>
 </html>
