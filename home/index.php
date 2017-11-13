@@ -9,17 +9,17 @@ error_reporting(E_ALL);
 
 require('../account/authconnect.php');
 
-if (!isset($_SESSION['logged_in'])) {
-    //shows login button
-    $value = 'Login';
-    $href = '../account/';
-} else {
+if ((!isset($_SESSION['logged_in'])) || ($_SESSION['logged_in']) === true) {
     //fields to-be used in file.php
     $sessionEmail = $_SESSION['email'];
     $uid = $auth->getUID($sessionEmail);
     //shows logout button
-    $value = 'Logout';
-    $href = '../account/logout.php';
+    $loginOrLogout_value = 'Logout';
+    $loginOrLogout_href = '../account/logout.php';
+} else {
+    //shows login button
+    $loginOrLogout_value = 'Login';
+    $loginOrLogout_href = '../account/';
 }
 
 ?>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['logged_in'])) {
         <title>Pinamals</title>
     </head>
 
-    <body>
+    <body onLoad="getLocation();">
     <!-- The Modal -->
     <div id="myModal" class="modal">
         
@@ -119,7 +119,7 @@ if (!isset($_SESSION['logged_in'])) {
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="pinamals1.png"></a>
+            <a class="navbar-brand"><img src="pinamals1.png"></a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
@@ -127,7 +127,7 @@ if (!isset($_SESSION['logged_in'])) {
               <li><a id="buttonAdd">Add</a><li>
               <li><a href="./about/">About</a></li>
               <li><a href="../account/profile/">Profile</a></li>
-              <li><a href="<?php echo $href ?>"><?php echo $value ?></a></li>
+              <li><a href="<?php echo $loginOrLogout_href ?>"><?php echo $loginOrLogout_value ?></a></li>
             </ul>
         </div>
         </div>
@@ -173,8 +173,8 @@ if (!isset($_SESSION['logged_in'])) {
     ?>
 
     <script type=text/javascript>
-
-    getLocation();
+    
+    //getLocation(); //Now called in body; fixes map not loading unless a user is logged in (not sure why yet)
     var x = document.getElementById("demo");
     function getLocation() {
         if (navigator.geolocation) {
