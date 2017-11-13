@@ -13,6 +13,7 @@ $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
 $login = $auth->login($email, $password, $remember = false);
 $_SESSION['email'] = $email;
+//$_SESSION['logged_in'] = false;
 
 if (!$login['error']) {
     $_SESSION['logged_in'] = true;
@@ -21,6 +22,10 @@ if (!$login['error']) {
 } else {
     $_SESSION['logged_in'] = false;
     echo $login['message'];
+}
+
+function getLoginSession() {
+    return $_SESSION['logged_in'];
 }
 
 ?>

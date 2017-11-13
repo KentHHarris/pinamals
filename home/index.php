@@ -7,16 +7,17 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require("../account/authconnect.php");
+require('../account/authconnect.php');
 
-if (!$_SESSION['logged_in']) {
+if (!isset($_SESSION['logged_in'])) {
     //shows login button
     $value = 'Login';
     $href = '../account/';
 } else {
-    //shows profile button
+    //fields to-be used in file.php
     $sessionEmail = $_SESSION['email'];
     $uid = $auth->getUID($sessionEmail);
+    //shows logout button
     $value = 'Logout';
     $href = '../account/logout.php';
 }
