@@ -230,7 +230,7 @@ if (isset($_SESSION['email'])) {
 
     // When the user clicks on the button, open the modal
     btn.onclick = function() {
-        <?php if ($_SESSION['email'] === null) { ?>
+        <?php if (!isset($_SESSION['email'])) { ?>
             alert("Must be logged in to add a pin.");
         <?php } else { ?>
             modal.style.display = "block";
