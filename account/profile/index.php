@@ -79,6 +79,8 @@ if (isset($_GET['user'])) {
             <p>User's username: <?php echo $userParams['username']; ?></p>
             <p>User's amount of posts: <?php echo $userParams['num_of_posts']; ?></p>
             <p>User's total amount of points: <?php echo $userParams['points_allocated']; ?></p> 
+        <?php } else { ?>
+            <p>Search for a user.</p>
         <?php } ?>
         
     </body>
