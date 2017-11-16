@@ -15,7 +15,7 @@ $config = new PHPAuth\Config($dbh);
 $auth   = new PHPAuth\Auth($dbh, $config);
 
 
-if($_SESSION['logged_in'] == true) {
+if(isset($_SESSION['email'])) {
     
     $email = $_SESSION['email'];
     $uid = $auth->getUID($email);
@@ -38,7 +38,6 @@ if($_SESSION['logged_in'] == true) {
 }
 
 function searchForUser($username, $dbh) {
-    
     $sth = $dbh->prepare("SELECT first_name, last_name, num_of_posts, points_allocated FROM user_info WHERE username = '$username'; ");
     $sth->execute();
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -58,6 +57,7 @@ if (isset($_GET['user'])) {
         $userParams['username'] = $username;
         $userParams['num_of_posts'] = $result[0]['num_of_posts'];
         $userParams['points_allocated'] = $result[0]['points_allocated'];
+        //echo 'first name ' . $userParams['first_name'];
     }
 }
 
@@ -74,9 +74,12 @@ if (isset($_GET['user'])) {
             <input name="user" id="user" type="text" placeholder="Enter a username to search for a user.">
         </form>
         
-        <p><?php echo $userParams['first_name'] . ' ' . $userParams['last_name'] ?></p>
-        <p><?php echo $userParams['username'] ?> has posted <?php echo $userParams['num_of_posts'] ?> times</p>
-        <p>Points allocated <?php echo $userParams['points_allocated'] ?></p>
+        <?php if (isset($_SESSION['email']) || $userParams['username'] !== '') { ?>
+            <p><?php echo $userParams['first_name'] . ' ' . $userParams['last_name']; ?></p>
+            <p><?php echo $userParams['username']; ?></p>
+            <p><?php echo $userParams['num_of_posts']; ?></p>
+            <p><?php echo $userParams['points_allocated']; ?></p> 
+        <?php } ?>
         
     </body>
     
