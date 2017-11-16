@@ -12,14 +12,13 @@ $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
 $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
 $login = $auth->login($email, $password, $remember = false);
-$_SESSION['email'] = $email;
 
 if (!$login['error']) {
-    $_SESSION['logged_in'] = true;
+    $_SESSION['email'] = $email;
     header('Location: ../home/');
     exit();
 } else {
-    $_SESSION['logged_in'] = false;
+    $_SESSION['email'] = null;
     echo $login['message'];
 }
 

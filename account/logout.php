@@ -14,7 +14,7 @@ $hash = $dbh->query("SELECT hash FROM sessions WHERE uid = (SELECT id FROM users
 $logout = $auth->logout($hash);
 
 if (!$logout['error']) {
-    $_SESSION['logged_in'] = false;
+    $_SESSION['email'] = null;
     header('Location: ../home/');
     exit();
 } else {

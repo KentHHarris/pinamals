@@ -9,8 +9,7 @@ error_reporting(E_ALL);
 
 require('../account/authconnect.php');
 
-if ((!isset($_SESSION['logged_in'])) || ($_SESSION['logged_in']) === true) {
-    //fields to-be used in file.php
+if (isset($_SESSION['email'])) {
     $sessionEmail = $_SESSION['email'];
     $uid = $auth->getUID($sessionEmail);
     //shows logout button
@@ -231,7 +230,7 @@ if ((!isset($_SESSION['logged_in'])) || ($_SESSION['logged_in']) === true) {
 
     // When the user clicks on the button, open the modal
     btn.onclick = function() {
-        <?php if ($_SESSION['logged_in'] == false) { ?>
+        <?php if ($_SESSION['email'] === null) { ?>
             alert("Must be logged in to add a pin.");
         <?php } else { ?>
             modal.style.display = "block";

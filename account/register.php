@@ -36,15 +36,29 @@ $first_name = ucfirst(filter_var($_POST['first_name'], FILTER_SANITIZE_STRING));
 $last_name = ucfirst(filter_var($_POST['last_name'], FILTER_SANITIZE_STRING));
 $params = array("Username" => "{$username}", "FirstName" => "{$first_name}", "LastName" => "{$last_name}");
 
+//Check to make sure a username does not already exist
+$sth = $dbh->prepare("SELECT username FROM user_info WHERE username = '$username'; ");
+$sth->execute();
+$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+if ($result) { ?>
+    <script type=text/javascript>
+        alert("That username already exists. Please try again with a different username.");
+    </script>
+<?php }
+
 $register = $auth->register($email, $password, $confirm_password);
 
 if (!$register['error']) {
+    
     $uid = $auth->getUID($email);
     $dbh->query("INSERT INTO user_info(uid,username,first_name,last_name) VALUES('".$uid."','".$params['Username']."','".$params['FirstName']."','".$params['LastName']."' )");
     header('Location: ./');
     exit();
+    
 } else {
     echo $register['message'];
 }
 
 ?>
+
