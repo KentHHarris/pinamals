@@ -75,10 +75,10 @@ if (isset($_GET['user'])) {
         </form>
         
         <?php if (isset($_SESSION['email']) || $userParams['username'] !== '') { ?>
-            <p><?php echo $userParams['first_name'] . ' ' . $userParams['last_name']; ?></p>
-            <p><?php echo $userParams['username']; ?></p>
-            <p><?php echo $userParams['num_of_posts']; ?></p>
-            <p><?php echo $userParams['points_allocated']; ?></p> 
+            <p>User: <?php echo $userParams['first_name'] . ' ' . $userParams['last_name']; ?></p>
+            <p>User's username: <?php echo $userParams['username']; ?></p>
+            <p>User's amount of posts: <?php echo $userParams['num_of_posts']; ?></p>
+            <p>User's total amount of points: <?php echo $userParams['points_allocated']; ?></p> 
         <?php } ?>
         
     </body>
